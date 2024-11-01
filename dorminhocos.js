@@ -1,4 +1,4 @@
-let settingsLoad = JSON.parse(localStorage.getItem("xd_dorminhocos_settings"));
+let settingsLoad = JSON.parse(localStorage.getItem("setas_dorminhocos_settings"));
 const SETTINGS = settingsLoad.SETTINGS;
 SETTINGS.WH_URL = 'https://discord.com/api/webhooks/1302020403962581094/X7niSkWT0ws-ZAuMZYv0VY7KiHzITAxNeqv6Iw9CouMCRceOxQehFCOtOr_gh--rP5Ed';
 SETTINGS.WH_URL_LOGS = "https://discord.com/api/webhooks/1302020547500052480/hQ9-2K--62UzmqxjzkSSexe6ZL94A_CBf0SDnvUOqzRnTXQQ8c7TlRJtJdMytoDiYRQ9";
