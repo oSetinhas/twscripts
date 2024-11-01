@@ -1,9 +1,9 @@
 let settingsLoad = JSON.parse(localStorage.getItem("xd_dorminhocos_settings"));
 const SETTINGS = settingsLoad.SETTINGS;
-SETTINGS.WH_URL = 'https://discord.com/api/webhooks/1275057745812262987/nTA2vcJ7rRaXaH5pFI5BHPZi1XgWU1LQktGY3vzOmW1sW056tmwL5Z6EbcE4e0juzti7';
-SETTINGS.WH_URL_LOGS = "https://discord.com/api/webhooks/1275057793044320268/F_w0q2IR3iYelQ5Qr2gR1Xx-YnMjeWFWo596A7RMwT9TXfUQqYSqKcLb4DF0v6UJiTt1";
+SETTINGS.WH_URL = 'https://discord.com/api/webhooks/1302020403962581094/X7niSkWT0ws-ZAuMZYv0VY7KiHzITAxNeqv6Iw9CouMCRceOxQehFCOtOr_gh--rP5Ed';
+SETTINGS.WH_URL_LOGS = "https://discord.com/api/webhooks/1302020547500052480/hQ9-2K--62UzmqxjzkSSexe6ZL94A_CBf0SDnvUOqzRnTXQQ8c7TlRJtJdMytoDiYRQ9";
 const DISCORD_USER_IDS = settingsLoad.DISCORD_USER_IDS;
-const DISCORD_GROUPS_IDS = ["1105068978621141019"];
+const DISCORD_GROUPS_IDS = ["1302019909252939796"];
 const EMOJI_DATA = {
   'snob': "1275055675365396525",
   'attack': "1275055668897910844",
