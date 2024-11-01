@@ -17,7 +17,7 @@ const EMOJI_DATA = {
   'sword': "1275055595279355914",
   'axe': '1275055670617702411'
 };
-const scriptData = JSON.parse(localStorage.getItem("xd_dorminhocos")) || {
+const scriptData = JSON.parse(localStorage.getItem("setas_dorminhocos")) || {
   'commandsIDs': {}
 };
 function getInfoFromRow(_0x428917) {
@@ -172,7 +172,7 @@ function getInfosToSendFromNewAttacks() {
     }
     _0xf2e366.attack_info[_0x3ac00e.defensiveCoord].push(_0x3ac00e);
   });
-  localStorage.setItem("xd_dorminhocos", JSON.stringify(scriptData));
+  localStorage.setItem("setas_dorminhocos", JSON.stringify(scriptData));
   return _0xf2e366;
 }
 function sendActivityMessage() {
