@@ -1,19 +1,60 @@
-var ultimoUpdate = "19:40h de 26 Setembro"; // Data do ultimo update
-var aldeiasAtaqueUltimoCoordenado  = "";
+var ultimoUpdate = "19:40h de 26 Setembro"; // Data do último update
 
-var  aldeiasCoordenado = "406|576 452|556 478|567 475|593 477|570 459|562 494|600 458|572 405|577 408|580 436|543 435|543 452|556 465|596 478|567 475|593 477|570 465|568 465|569 459|562 494|600 460|557 492|608 497|603 497|604 498|603 458|572 457|574";
-// Aldeias com fulls detetados para o coordenado atual
-for (var aldeiasArray = uniqueArray4(aldeiasCoordenado.split(" ")), aldeiasAtaqueUltimoCoordenadoArray = uniqueArray4(aldeiasAtaqueUltimoCoordenado.split(" ")), i = 2; i < document.querySelector("#incomings_table > tbody").childElementCount; i++) {
-    var coord = $("#incomings_table > tbody > tr:nth-child(" + i + ") > td:nth-child(3) > a")[0]
-        .textContent.match(/\d+\|\d+\)/)[0]
-        .replace(")", "");
-    aldeiasArray.includes(coord)
-        ? (($("#incomings_table > tbody > tr:nth-child(" + i + ") > td:nth-child(3) > a")[0].style.backgroundColor = "#1bff00"),
-          ($("#incomings_table > tbody > tr:nth-child(" + i + ") > td:nth-child(3)")[0].style.textDecoration = "line-through"))
-        : aldeiasAtaqueUltimoCoordenadoArray.includes(coord) && ($("#incomings_table > tbody > tr:nth-child(" + i + ") > td:nth-child(3)")[0].style.backgroundColor = "#ffa700");
+// URLs to your raw text files on GitHub:
+const urlLastCoords = "https://raw.githubusercontent.com/oSetinhas/twscripts/main/last_coord.txt";
+const urlCurrentCoords = "https://raw.githubusercontent.com/oSetinhas/twscripts/main/current_coord.txt";
+
+// Load both coordinate files in parallel:
+Promise.all([
+  fetch(urlLastCoords).then(response => response.text()),
+  fetch(urlCurrentCoords).then(response => response.text())
+])
+.then(([lastCoordsText, currentCoordsText]) => {
+  // Process the "last coordinates" file (it may be empty):
+  var lastCoords = lastCoordsText
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+  
+  // Process the "current coordinates" file (it may also be empty):
+  var currentCoords = currentCoordsText
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+
+  // Create unique arrays:
+  var uniqueLastCoords = uniqueArray4(lastCoords);
+  var uniqueCurrentCoords = uniqueArray4(currentCoords);
+
+  // Process each row in the table (starting at row 2)
+  var tableBody = document.querySelector("#incomings_table > tbody");
+  for (var i = 2; i < tableBody.childElementCount; i++) {
+    // Get the anchor element that contains the coordinate text
+    var row = $("#incomings_table > tbody > tr:nth-child(" + i + ")");
+    var aElem = row.find("td:nth-child(3) > a")[0];
+    if (!aElem) continue;
+    
+    // Extract the coordinate (assumes format like "xxx|yyy)" in the text)
+    var match = aElem.textContent.match(/\d+\|\d+\)/);
+    if (!match) continue;
+    var coord = match[0].replace(")", "");
+
+    // Style the row based on the coordinate lists:
+    if (uniqueLastCoords.includes(coord)) {
+      aElem.style.backgroundColor = "#1bff00";
+      row.find("td:nth-child(3)")[0].style.textDecoration = "line-through";
+    } else if (uniqueCurrentCoords.includes(coord)) {
+      row.find("td:nth-child(3)")[0].style.backgroundColor = "#ffa700";
+    }
+  }
+})
+.catch(error => console.error("Error loading coordinates files:", error));
+
+// Helper function to create a unique array from an array
+function uniqueArray4(arr) {
+  return [...new Set(arr)];
 }
-function uniqueArray4(t) {
-    return [...new Set(t)];
-}
-const exp = '<div style="width: 100%; text-align: center; "><img src="https://i.imgur.com/F7hHvT2.png"></div>';
-$(".overview_filters_manage").eq(0).before(exp), $(".overview_filters_manage").eq(0).before(`<h1>Ultimo update: ${ultimoUpdate} </h1> <small>xdam98 (Discord: Xico#7941) </small> <br>`);
+
+const exp = '<div style="width: 100%; text-align: center;"><img src="https://i.imgur.com/F7hHvT2.png"></div>';
+$(".overview_filters_manage").eq(0).before(exp);
+$(".overview_filters_manage").eq(0).before(`<h1>Ultimo update: ${ultimoUpdate} </h1> <small>xdam98 (Discord: Xico#7941)</small><br>`);
