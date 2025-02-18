@@ -1,4 +1,4 @@
-var ultimoUpdate = "19:40h de 26 Setembro"; // Data do último update
+var ultimoUpdate = "00:18h de 18 de Fevereiro"; // Data do último update
 
 // URLs to your raw text files on GitHub:
 const urlLastCoords = "https://raw.githubusercontent.com/oSetinhas/twscripts/main/last_coord.txt";
@@ -10,13 +10,13 @@ Promise.all([
   fetch(urlCurrentCoords).then(response => response.text())
 ])
 .then(([lastCoordsText, currentCoordsText]) => {
-  // Process the "last coordinates" file (it may be empty):
+  // Process the "last coordinates" file
   var lastCoords = lastCoordsText
     .split('\n')
     .map(line => line.trim())
     .filter(line => line.length > 0);
   
-  // Process the "current coordinates" file (it may also be empty):
+  // Process the "current coordinates" file
   var currentCoords = currentCoordsText
     .split('\n')
     .map(line => line.trim())
